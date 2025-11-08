@@ -6,8 +6,8 @@ zone-based access control, policy enforcement, and reasoning isolation.
 
 from typing import List, Dict, Optional, Tuple
 from sqlmodel import Session, select
-from backend.models import Memory, Session as SessionModel, Audit, TrustScore
-from backend.config import settings
+from app.models import Memory, Session as SessionModel, Audit, TrustScore
+from app.config import settings
 import hashlib
 import json
 from datetime import datetime

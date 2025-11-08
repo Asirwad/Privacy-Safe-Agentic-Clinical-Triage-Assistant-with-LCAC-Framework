@@ -1,7 +1,7 @@
 """Database setup and session management."""
 
 from sqlmodel import SQLModel, create_engine, Session
-from backend.config import settings
+from app.config import settings
 
 # Create engine
 engine = create_engine(

@@ -8,12 +8,12 @@ from pydantic import BaseModel
 from uuid import UUID
 import uvicorn
 
-from backend.database import get_session, init_db
-from backend.models import Memory, Session as SessionModel, Audit, TrustScore
-from backend.lcac import LCACEngine
-from backend.trust import TrustEngine
-from backend.orchestrator import TriageOrchestrator
-from backend.config import settings
+from app.database import get_session, init_db
+from app.models import Memory, Session as SessionModel, Audit, TrustScore
+from app.lcac import LCACEngine
+from app.trust import TrustEngine
+from app.orchestrator import TriageOrchestrator
+from app.config import settings
 
 # Initialize database
 init_db()
@@ -202,7 +202,7 @@ async def create_session(
     new_session = SessionModel(
         zone=session_data.zone,
         user_id=session_data.user_id,
-        metadata=session_data.metadata or {}
+        session_metadata=session_data.metadata or {}
     )
     new_session.set_metadata(session_data.metadata or {})
     
@@ -292,13 +292,16 @@ def get_audit(
     if session_id:
         try:
             session_uuid = UUID(session_id)
-            statement = select(Audit).where(Audit.session_id == session_uuid).order_by(Audit.timestamp.desc())
+            statement = select(Audit).where(Audit.session_id == session_uuid).order_by(Audit.timestamp)
         except (ValueError, TypeError):
             raise HTTPException(status_code=400, detail="Invalid session_id format")
     else:
-        statement = select(Audit).order_by(Audit.timestamp.desc())
+        statement = select(Audit).order_by(Audit.timestamp)
     
     audits = db_session.exec(statement).all()
+    
+    # Reverse the order to get descending order (most recent first)
+    audits = list(reversed(audits))
     
     return [
         AuditResponse(
@@ -337,4 +340,3 @@ async def get_trust(
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-

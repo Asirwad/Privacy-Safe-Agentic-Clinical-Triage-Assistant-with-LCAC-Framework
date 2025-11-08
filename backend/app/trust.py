@@ -1,8 +1,8 @@
 """Trust scoring engine for LCAC."""
 
 from sqlmodel import Session, select
-from backend.models import TrustScore
-from backend.config import settings
+from app.models import TrustScore
+from app.config import settings
 from datetime import datetime
 from typing import Optional
 

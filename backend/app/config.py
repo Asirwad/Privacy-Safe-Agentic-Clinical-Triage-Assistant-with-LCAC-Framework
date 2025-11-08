@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     
     # Google Gemini Configuration
     gemini_api_key: Optional[str] = None  # Also accepts GOOGLE_API_KEY env var
+    google_api_key: Optional[str] = None  # Standard env var for Google APIs
     gemini_model: str = "gemini-pro"
     gemini_temperature: float = 0.7
     gemini_max_tokens: int = 500
@@ -48,4 +49,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-

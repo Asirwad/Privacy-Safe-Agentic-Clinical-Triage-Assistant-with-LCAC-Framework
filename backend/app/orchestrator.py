@@ -19,10 +19,10 @@ try:
 except ImportError:
     ChatGoogleGenerativeAI = None
 
-from backend.lcac import LCACEngine
-from backend.trust import TrustEngine
-from backend.models import Memory, Session as SessionModel
-from backend.config import settings
+from app.lcac import LCACEngine
+from app.trust import TrustEngine
+from app.models import Memory, Session as SessionModel
+from app.config import settings
 import hashlib
 import json
 
@@ -48,7 +48,7 @@ class TriageOrchestrator:
             if settings.openai_api_key:
                 self.llm = self._init_openai_llm()
                 self.llm_provider = "openai"
-            elif settings.gemini_api_key:
+            elif settings.gemini_api_key or settings.google_api_key:
                 self.llm = self._init_gemini_llm()
                 self.llm_provider = "gemini"
     
@@ -78,10 +78,10 @@ class TriageOrchestrator:
         import os
         
         # Check for API key in settings or environment (GOOGLE_API_KEY is the standard env var)
-        api_key = settings.gemini_api_key or os.getenv("GOOGLE_API_KEY")
+        api_key = settings.gemini_api_key or settings.google_api_key or os.getenv("GOOGLE_API_KEY")
         
         if not api_key:
-            print("Warning: Gemini API key not set. Set GEMINI_API_KEY or GOOGLE_API_KEY environment variable.")
+            print("Warning: Gemini API key not set. Set GEMINI_API_KEY, GOOGLE_API_KEY, or google_api_key environment variable.")
             return None
         
         if ChatGoogleGenerativeAI is None:
@@ -91,8 +91,8 @@ class TriageOrchestrator:
         try:
             # ChatGoogleGenerativeAI reads from GOOGLE_API_KEY env var by default
             # If we have it in settings, set it as env var so LangChain can pick it up
-            if settings.gemini_api_key and not os.getenv("GOOGLE_API_KEY"):
-                os.environ["GOOGLE_API_KEY"] = settings.gemini_api_key
+            if (settings.gemini_api_key or settings.google_api_key) and not os.getenv("GOOGLE_API_KEY"):
+                os.environ["GOOGLE_API_KEY"] = settings.gemini_api_key or settings.google_api_key
             
             return ChatGoogleGenerativeAI(
                 model=settings.gemini_model,
@@ -269,46 +269,27 @@ Please provide a helpful response based on the patient context above. Do not ref
         except Exception as e:
             response = f"Error processing query with {self.llm_provider}: {str(e)}"
         
-        # Extract used memory IDs
-        used_memory_ids = [str(mem.id) for mem in allowed_memories]
-        
         # Post-inference hook
-        is_valid, violation_reason, post_error = self._post_inference_hook(
-            session_id,
-            message,
-            response,
-            used_memory_ids
+        used_memory_ids = [str(mem.id) for mem in allowed_memories]
+        is_valid, violation_reason, revoke_reason = self._post_inference_hook(
+            session_id, message, response, used_memory_ids
         )
         
         # Create audit record
-        try:
-            audit = self.lcac.create_audit_record(
-                session_id=session_id,
-                prompt=message,
-                response=response,
-                used_memory_ids=used_memory_ids,
-                policy_violation=not is_valid,
-                violation_reason=violation_reason
-            )
-            audit_id = str(audit.id)
-        except Exception as e:
-            # If audit creation fails, still return response but log error
-            audit_id = None
-            print(f"Warning: Failed to create audit record: {e}")
-        
-        # Determine if session was revoked
-        session_revoked = (
-            not is_valid and 
-            post_error and 
-            ("revoked" in post_error.lower() or violation_reason is not None)
+        audit = self.lcac.create_audit_record(
+            session_id,
+            message,
+            response,
+            used_memory_ids,
+            not is_valid,
+            violation_reason
         )
         
         return {
             "success": is_valid,
-            "error": violation_reason or post_error,
+            "error": violation_reason or revoke_reason,
             "response": response,
-            "audit_id": audit_id,
+            "audit_id": str(audit.id),
             "used_memory_ids": used_memory_ids,
-            "session_revoked": session_revoked
+            "session_revoked": bool(revoke_reason)
         }
-

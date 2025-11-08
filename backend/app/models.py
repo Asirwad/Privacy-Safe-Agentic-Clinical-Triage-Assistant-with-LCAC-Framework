@@ -38,7 +38,7 @@ class Session(SQLModel, table=True):
     user_id: str = Field(index=True)
     started_at: datetime = Field(default_factory=datetime.utcnow)
     revoked_at: Optional[datetime] = None
-    metadata: str = Field(default="{}")  # JSON metadata
+    session_metadata: str = Field(default="{}")  # JSON metadata
     
     def is_revoked(self) -> bool:
         """Check if session is revoked."""
@@ -47,13 +47,13 @@ class Session(SQLModel, table=True):
     def get_metadata(self) -> dict:
         """Parse metadata from JSON string."""
         try:
-            return json.loads(self.metadata) if self.metadata else {}
+            return json.loads(self.session_metadata) if self.session_metadata else {}
         except json.JSONDecodeError:
             return {}
     
     def set_metadata(self, metadata: dict):
         """Set metadata as JSON string."""
-        self.metadata = json.dumps(metadata)
+        self.session_metadata = json.dumps(metadata)
 
 
 class Audit(SQLModel, table=True):
@@ -89,4 +89,3 @@ class TrustScore(SQLModel, table=True):
     last_updated: datetime = Field(default_factory=datetime.utcnow)
     violation_count: int = Field(default=0)
     successful_inferences: int = Field(default=0)
-
