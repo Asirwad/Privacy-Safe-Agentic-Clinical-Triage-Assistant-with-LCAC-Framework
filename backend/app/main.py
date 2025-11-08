@@ -1,6 +1,7 @@
 """FastAPI application for Privacy-Safe Agentic Clinical Triage Assistant."""
 
 from fastapi import FastAPI, Depends, HTTPException, Header
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 from sqlmodel import Session, select
 from typing import List, Optional
@@ -23,6 +24,16 @@ app = FastAPI(
     title="Privacy-Safe Agentic Clinical Triage Assistant",
     description="Backend API with LCAC (Least-Context Access Control) framework",
     version="0.1.0"
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["X-API-Key"],
 )
 
 # API Key authentication

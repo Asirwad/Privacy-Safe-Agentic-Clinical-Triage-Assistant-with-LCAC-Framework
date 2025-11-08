@@ -1,90 +1,62 @@
-# Next.js Enterprise Boilerplate
+# LCAC Clinical Triage Dashboard
 
-A production-ready template for building enterprise applications with Next.js. This boilerplate provides a solid foundation with carefully selected technologies and ready-to-go infrastructure to help you develop high-quality applications efficiently.
+An enterprise-grade dashboard for visualizing the Least-Context Access Control (LCAC) framework in action.
 
-## Motivation
+## Features
 
-While most Next.js boilerplates focus on individual developer needs with excessive complexity, **next-enterprise** prioritizes strategic simplicity for enterprise teams. It offers a streamlined foundation with high-impact features that maximize developer productivity and accelerate time-to-market for business-critical applications.
+- **Zone-Based Access Control Visualization**: Interactive visualization of LCAC zones and their allowed tags
+- **Memory Management**: Real-time display of accessible and blocked memories
+- **Session Monitoring**: Track active and revoked sessions
+- **Audit Trail**: Comprehensive logging of all AI interactions
+- **Trust Scoring**: Dynamic trust scores based on policy compliance
 
-> [!NOTE]
-> This is a customized Next.js boilerplate for enterprise applications.
+## Getting Started
 
-## Documentation
+1. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-There is separate documentation that explains its functionality, highlights core business values and technical decisions, provides guidelines for future development, and includes architectural diagrams.
+2. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
 
-We encourage you to review the documentation to learn more about the features and capabilities.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Integrated features
+## Environment Variables
 
-### Boilerplate
-With this template you will get all the boilerplate features included:
+Create a `.env.local` file with the following variables:
 
-* [Next.js 15](https://nextjs.org/) - Performance-optimized configuration using App Directory
-* [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework for efficient UI development
-* [ESlint 9](https://eslint.org/) and [Prettier](https://prettier.io/) - Code consistency and error prevention
-* [Corepack](https://github.com/nodejs/corepack) & [pnpm](https://pnpm.io/) as the package manager - For project management without compromises 
-* [Strict TypeScript](https://www.typescriptlang.org/) - Enhanced type safety with carefully crafted config and [ts-reset](https://github.com/total-typescript/ts-reset) library
-* [GitHub Actions](https://github.com/features/actions) - Pre-configured workflows including bundle size and performance tracking
-* Perfect Lighthouse score - Optimized performance metrics
-* [Bundle analyzer](https://www.npmjs.com/package/@next/bundle-analyzer) - Monitor and manage bundle size during development
-* Testing suite - [Vitest](https://vitest.dev), [React Testing Library](https://testing-library.com/react), and [Playwright](https://playwright.dev/) for comprehensive testing
-* [Storybook](https://storybook.js.org/) - Component development and documentation
-* Advanced testing - Smoke and acceptance testing capabilities
-* [Conventional commits](https://www.conventionalcommits.org/) - Standardized commit history management
-* [Observability](https://opentelemetry.io/) - Open Telemetry integration
-* [Absolute imports](https://nextjs.org/docs/advanced-features/module-path-aliases) - Simplified import structure
-* [Health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) - Kubernetes-compatible monitoring
-* [Radix UI](https://www.radix-ui.com/) - Headless components for customization
-* [CVA](http://cva.style/) (Class Variance Authority) - Consistent design system creation
-* [Renovate BOT](https://www.whitesourcesoftware.com/free-developer-tools/renovate) - Automated dependency and security updates
-* [Patch-package](https://www.npmjs.com/package/patch-package) - External dependency fixes without compromises
-* Component relationship tools - Graph for managing coupling and cohesion
-* [Semantic Release](https://github.com/semantic-release/semantic-release) - Automated changelog generation
-* [T3 Env](https://env.t3.gg/) - Streamlined environment variable management
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+NEXT_PUBLIC_API_KEY=dev-demo-key-change-in-production
+```
 
-### Infrastructure & deployments
+## Architecture
 
-#### Vercel
+The dashboard is built with:
+- Next.js 13+ with App Router
+- Tailwind CSS for styling
+- TypeScript for type safety
+- Radix UI components for accessibility
 
-Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=next-enterprise) by clicking the button below:
+## LCAC Framework Visualization
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
+The dashboard provides real-time visualization of the LCAC framework:
+1. **Zone-Based Access Control**: Shows how memories are isolated by zone
+2. **Policy Enforcement**: Demonstrates pre/post-inference hooks
+3. **Audit & Trust**: Displays provenance tracking and trust scoring
+4. **Privacy Protection**: Visualizes session revocation and memory redaction
 
-#### Custom cloud infrastructure
+## Learn More
 
-This boilerplate offers dedicated infrastructure as code (IaC) solutions built with Terraform, designed specifically for deploying Next.js applications.
-
-Learn more in the documentation how to quickstart with the deployments using simple CLI.
-
-#### Available cloud providers and theirs features:
-
-* **AWS (Amazon Web Services)**
-  * Automated provisioning of AWS infrastructure
-  * Scalable & secure setup using:
-     * VPC - Isolated network infrastructure
-     * Elastic Container Service (ECS) - Container orchestration
-     * Elastic Container Registry (ECR) - Container image storage
-     * Application Load Balancer - Traffic distribution
-     * S3 + CloudFront - Static asset delivery and caching
-     * AWS WAF - Web Application Firewall protection
-     * Redis Cluster - Caching
-  * CI/CD ready - Continuous integration and deployment pipeline
-
-*... more coming soon*
-
-### Team & maintenance
-
-This boilerplate is maintained by the community and provides up to date security features and integrated feature updates.
-
-#### Active maintainers
-
-Community contributors
-
-#### All-time contributors
-
-Community contributors
-
-## License
-
-MIT
+To learn more about the LCAC framework, check out the [backend documentation](../backend/README.md).

@@ -94,7 +94,7 @@ python scripts/init_db.py
 
 6. **Start the server**:
 ```bash
-uvicorn backend.main:app --reload
+uvicorn app.main:app --reload
 ```
 
 The API will be available at `http://localhost:8000`
@@ -206,6 +206,26 @@ Get audit records for a session.
 #### `GET /trust?user_id=patient_001`
 Get trust score for a user.
 
+## Dashboard Frontend
+
+This backend is designed to work with the enterprise-grade dashboard frontend located in the `frontend/` directory. The dashboard provides:
+
+- **Zone-Based Access Control Visualization**: Interactive visualization of LCAC zones
+- **Memory Management**: Real-time display of accessible and blocked memories
+- **Session Monitoring**: Track active and revoked sessions
+- **Audit Trail**: Comprehensive logging of all AI interactions
+- **Trust Scoring**: Dynamic trust scores based on policy compliance
+- **Clinical Triage Assistant**: Interactive demo of the privacy-safe AI assistant
+
+To use the dashboard:
+
+1. Start the backend server as described above
+2. Navigate to the frontend directory: `cd ../frontend`
+3. Install dependencies: `npm install` (or `yarn install` or `pnpm install`)
+4. Copy environment example: `cp .env.local.example .env.local`
+5. Start the frontend: `npm run dev` (or `yarn dev` or `pnpm dev`)
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
+
 ## Demo Scenarios
 
 Run the demo scripts to see the system in action:
@@ -267,7 +287,7 @@ export GEMINI_MAX_TOKENS=500               # Optional, default: 500
 
 ## LCAC Policy Configuration
 
-LCAC policies are defined in `backend/lcac.py`. Zones and allowed tags:
+LCAC policies are defined in `app/lcac.py`. Zones and allowed tags:
 
 ```python
 ZONE_POLICIES = {
@@ -448,4 +468,3 @@ For questions or contributions, please open an issue on GitHub.
 ---
 
 **Note**: This is an MVP demonstration. For production use, implement additional security controls, encryption, and compliance measures as required by your organization and regulatory requirements.
-
