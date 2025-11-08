@@ -103,24 +103,24 @@ export function TriageAssistant() {
   }
 
   return (
-    <Card className="h-[calc(100vh-200px)] flex flex-col">
+    <Card className="h-[calc(100vh-200px)] flex flex-col glass-card">
       <CardHeader 
         title="Triage Assistant" 
         subtitle="AI-powered clinical decision support"
-        action={sessionId && <Badge variant="success" size="sm">Live</Badge>}
+        action={sessionId && <Badge variant="success" size="sm" className="interactive-element">Live</Badge>}
       />
       
       <div className="flex-1 overflow-y-auto mb-4 space-y-4">
         {messages.map((message) => (
           <div 
             key={message.id} 
-            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} interactive-element`}
           >
             <div 
               className={`max-w-full px-3 py-2 rounded text-sm ${
                 message.role === 'user' 
                   ? 'bg-blue-500 text-white' 
-                  : 'bg-gray-100 text-gray-800'
+                  : 'bg-gray-100/80 text-gray-800'
               }`}
             >
               <p>{message.content}</p>
@@ -132,8 +132,8 @@ export function TriageAssistant() {
         ))}
         
         {loading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 text-gray-800 px-3 py-2 rounded">
+          <div className="flex justify-start interactive-element">
+            <div className="bg-gray-100/80 text-gray-800 px-3 py-2 rounded">
               <div className="flex space-x-2">
                 <LoadingSpinner size="sm" />
                 <span>Thinking...</span>
@@ -150,12 +150,13 @@ export function TriageAssistant() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Describe symptoms..."
-            className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 interactive-element"
           />
           <Button
             type="submit"
             size="sm"
             disabled={loading || !input.trim()}
+            className="interactive-element"
           >
             {loading ? <LoadingSpinner size="sm" /> : 'Send'}
           </Button>
@@ -163,12 +164,12 @@ export function TriageAssistant() {
       </form>
       
       {error && (
-        <div className="mt-2 p-2 bg-red-50 text-red-700 rounded text-xs">
+        <div className="mt-2 p-2 bg-red-50/80 text-red-700 rounded text-xs interactive-element">
           {error}
         </div>
       )}
       
-      <div className="mt-3 text-xs text-gray-600">
+      <div className="mt-3 text-xs text-gray-600 interactive-element">
         <p><span className="font-semibold">Zone:</span> Triage</p>
         <p className="mt-1"><span className="font-semibold">Session:</span> {sessionId ? sessionId.substring(0, 8) + '...' : 'Not established'}</p>
       </div>

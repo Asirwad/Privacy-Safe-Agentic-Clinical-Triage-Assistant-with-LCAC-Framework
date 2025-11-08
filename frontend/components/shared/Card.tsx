@@ -26,7 +26,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={cn(
-        hover ? 'card-hover' : 'card',
+        hover ? 'glass-card-hover interactive-element' : 'glass-card',
         paddingStyles[padding],
         className
       )}
@@ -62,7 +62,7 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
         )}
       </div>
       {action && (
-        <div>
+        <div className="interactive-element">
           {action}
         </div>
       )}

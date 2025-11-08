@@ -120,22 +120,22 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
       {/* Header */}
-      <header className="bg-white border-b border-gray-300 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-300 sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <div className="h-8 w-8 rounded bg-blue-600 flex items-center justify-center">
+                <div className="h-8 w-8 rounded bg-blue-600 flex items-center justify-center interactive-element">
                   <span className="text-white font-bold text-sm">LC</span>
                 </div>
-                <span className="ml-2 text-xl font-semibold text-gray-900">LCAC<span className="text-blue-600">Triage</span></span>
+                <span className="ml-2 text-xl font-semibold text-gray-900 interactive-element">LCAC<span className="text-blue-600">Triage</span></span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="success">Live</Badge>
-              <Button variant="subtle" size="sm">
+              <Badge variant="success" className="interactive-element">Live</Badge>
+              <Button variant="subtle" size="sm" className="interactive-element">
                 Settings
               </Button>
             </div>
@@ -154,8 +154,8 @@ export default function Dashboard() {
           <div className="lg:w-8/12">
             {/* Dashboard Header */}
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">LCAC Dashboard</h1>
-              <p className="mt-1 text-gray-600">
+              <h1 className="text-2xl font-bold text-gray-900 interactive-element">LCAC Dashboard</h1>
+              <p className="mt-1 text-gray-600 interactive-element">
                 Real-time visualization of cognitive access control in clinical triage
               </p>
             </div>
@@ -166,10 +166,10 @@ export default function Dashboard() {
                 {zones.map((zone) => (
                   <button
                     key={zone.id}
-                    className={`px-4 py-2 rounded-sm font-semibold transition-all ${
+                    className={`px-4 py-2 rounded-sm font-semibold transition-all interactive-element ${
                       activeZone === zone.id
-                        ? `${zone.color} text-white shadow-sm`
-                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                        ? `${zone.color} text-white shadow-md hover:shadow-lg`
+                        : 'bg-white/80 text-gray-700 border border-gray-300 hover:bg-gray-50/80'
                     }`}
                     onClick={() => setActiveZone(zone.id)}
                   >
@@ -177,7 +177,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
-              <div className="mt-4 p-4 bg-blue-50 rounded">
+              <div className="mt-4 p-4 bg-blue-50/80 rounded interactive-element">
                 <p className="text-blue-800">
                   <span className="font-semibold">Active Zone:</span> {activeZoneData?.name} • 
                   <span className="ml-2">Allowed tags: {activeZoneData?.allowedTags.join(', ')}</span>
@@ -190,12 +190,12 @@ export default function Dashboard() {
               <CardHeader 
                 title="Memory Management" 
                 subtitle="Accessible and blocked memories by zone"
-                action={<Badge variant="info">{memories.length} memories</Badge>}
+                action={<Badge variant="info" className="interactive-element">{memories.length} memories</Badge>}
               />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-semibold text-green-700 mb-3 flex items-center">
+                  <h3 className="font-semibold text-green-700 mb-3 flex items-center interactive-element">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -203,13 +203,13 @@ export default function Dashboard() {
                   </h3>
                   <div className="space-y-4">
                     {accessibleMemories.map((memory) => (
-                      <div key={memory.id} className="border border-green-200 rounded p-4 bg-green-50">
+                      <div key={memory.id} className="border border-green-200 rounded p-4 bg-green-50/80 interactive-element">
                         <div className="flex justify-between items-start">
-                          <Badge variant="success" size="sm">
+                          <Badge variant="success" size="sm" className="interactive-element">
                             {memory.zone}
                           </Badge>
                           {memory.redacted && (
-                            <Badge variant="error" size="sm">
+                            <Badge variant="error" size="sm" className="interactive-element">
                               Redacted
                             </Badge>
                           )}
@@ -217,7 +217,7 @@ export default function Dashboard() {
                         <p className="mt-2 text-sm text-gray-700">{memory.content}</p>
                         <div className="mt-2 flex flex-wrap gap-1">
                           {memory.tags.map((tag) => (
-                            <Badge key={tag} variant="info" size="sm">
+                            <Badge key={tag} variant="info" size="sm" className="interactive-element">
                               {tag}
                             </Badge>
                           ))}
@@ -225,7 +225,7 @@ export default function Dashboard() {
                       </div>
                     ))}
                     {accessibleMemories.length === 0 && (
-                      <div className="text-center py-8 text-gray-500">
+                      <div className="text-center py-8 text-gray-500 interactive-element">
                         No accessible memories in this zone
                       </div>
                     )}
@@ -233,7 +233,7 @@ export default function Dashboard() {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-red-700 mb-3 flex items-center">
+                  <h3 className="font-semibold text-red-700 mb-3 flex items-center interactive-element">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -241,13 +241,13 @@ export default function Dashboard() {
                   </h3>
                   <div className="space-y-4">
                     {inaccessibleMemories.map((memory) => (
-                      <div key={memory.id} className="border border-red-200 rounded p-4 bg-red-50 opacity-80">
+                      <div key={memory.id} className="border border-red-200 rounded p-4 bg-red-50/80 opacity-90 interactive-element">
                         <div className="flex justify-between items-start">
-                          <Badge variant="error" size="sm">
+                          <Badge variant="error" size="sm" className="interactive-element">
                             {memory.zone}
                           </Badge>
                           {memory.redacted && (
-                            <Badge variant="error" size="sm">
+                            <Badge variant="error" size="sm" className="interactive-element">
                               Redacted
                             </Badge>
                           )}
@@ -255,7 +255,7 @@ export default function Dashboard() {
                         <p className="mt-2 text-sm text-gray-700">{memory.content}</p>
                         <div className="mt-2 flex flex-wrap gap-1">
                           {memory.tags.map((tag) => (
-                            <Badge key={tag} variant="default" size="sm">
+                            <Badge key={tag} variant="default" size="sm" className="interactive-element">
                               {tag}
                             </Badge>
                           ))}
@@ -266,7 +266,7 @@ export default function Dashboard() {
                       </div>
                     ))}
                     {inaccessibleMemories.length === 0 && (
-                      <div className="text-center py-8 text-gray-500">
+                      <div className="text-center py-8 text-gray-500 interactive-element">
                         No blocked memories
                       </div>
                     )}
@@ -282,17 +282,17 @@ export default function Dashboard() {
                 <CardHeader 
                   title="Active Sessions" 
                   subtitle="Currently active LCAC sessions"
-                  action={<Badge variant="info">{sessions.length} sessions</Badge>}
+                  action={<Badge variant="info" className="interactive-element">{sessions.length} sessions</Badge>}
                 />
                 
                 <div className="space-y-4">
                   {sessions.map((session) => (
                     <div 
                       key={session.id} 
-                      className={`border rounded p-4 ${
+                      className={`border rounded p-4 interactive-element ${
                         session.status === 'active' 
-                          ? 'border-green-200 bg-green-50' 
-                          : 'border-red-200 bg-red-50'
+                          ? 'border-green-200 bg-green-50/80' 
+                          : 'border-red-200 bg-red-50/80'
                       }`}
                     >
                       <div className="flex justify-between items-start">
@@ -300,13 +300,13 @@ export default function Dashboard() {
                           <h4 className="font-semibold text-gray-900">Session {session.id.substring(0, 8)}...</h4>
                           <p className="text-sm text-gray-600">User: {session.userId}</p>
                         </div>
-                        <Badge variant={session.status === 'active' ? 'success' : 'error'} size="sm">
+                        <Badge variant={session.status === 'active' ? 'success' : 'error'} size="sm" className="interactive-element">
                           {session.status}
                         </Badge>
                       </div>
                       
                       <div className="mt-2 flex items-center text-sm text-gray-600">
-                        <Badge variant="info" size="sm">
+                        <Badge variant="info" size="sm" className="interactive-element">
                           {session.zone}
                         </Badge>
                         <span className="ml-2">Started: {session.startTime}</span>
@@ -321,7 +321,7 @@ export default function Dashboard() {
                   ))}
                   
                   {sessions.length === 0 && (
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-8 text-gray-500 interactive-element">
                       No active sessions
                     </div>
                   )}
@@ -333,15 +333,15 @@ export default function Dashboard() {
                 <CardHeader 
                   title="Trust Scores" 
                   subtitle="Dynamic trust scoring for users"
-                  action={<Badge variant="info">{trustScores.length} users</Badge>}
+                  action={<Badge variant="info" className="interactive-element">{trustScores.length} users</Badge>}
                 />
                 
                 <div className="space-y-4">
                   {trustScores.map((score) => (
-                    <div key={score.userId} className="border border-gray-200 rounded p-4">
+                    <div key={score.userId} className="border border-gray-200 rounded p-4 interactive-element">
                       <div className="flex justify-between items-start">
                         <h4 className="font-semibold text-gray-900">User: {score.userId}</h4>
-                        <Badge variant="info" size="sm">
+                        <Badge variant="info" size="sm" className="interactive-element">
                           Score: {score.score.toFixed(2)}
                         </Badge>
                       </div>
@@ -353,7 +353,7 @@ export default function Dashboard() {
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className={`h-2 rounded-full ${
+                            className={`h-2 rounded-full interactive-element ${
                               score.score > 0.8 ? 'bg-green-500' : 
                               score.score > 0.5 ? 'bg-yellow-500' : 'bg-red-500'
                             }`} 
@@ -363,11 +363,11 @@ export default function Dashboard() {
                       </div>
                       
                       <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
-                        <div className="bg-red-50 p-2 rounded">
+                        <div className="bg-red-50/80 p-2 rounded interactive-element">
                           <p className="font-semibold text-red-800">Violations</p>
                           <p className="text-red-600">{score.violationCount}</p>
                         </div>
-                        <div className="bg-green-50 p-2 rounded">
+                        <div className="bg-green-50/80 p-2 rounded interactive-element">
                           <p className="font-semibold text-green-800">Successful</p>
                           <p className="text-green-600">{score.successfulInferences}</p>
                         </div>
@@ -376,7 +376,7 @@ export default function Dashboard() {
                   ))}
                   
                   {trustScores.length === 0 && (
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-8 text-gray-500 interactive-element">
                       No trust scores available
                     </div>
                   )}
@@ -389,17 +389,17 @@ export default function Dashboard() {
               <CardHeader 
                 title="Audit Trail" 
                 subtitle="Complete provenance tracking"
-                action={<Badge variant="info">{auditLogs.length} events</Badge>}
+                action={<Badge variant="info" className="interactive-element">{auditLogs.length} events</Badge>}
               />
               
               <div className="space-y-4">
                 {auditLogs.map((log) => (
                   <div 
                     key={log.id} 
-                    className={`border rounded p-4 ${
+                    className={`border rounded p-4 interactive-element ${
                       log.policyViolation 
-                        ? 'border-red-200 bg-red-50' 
-                        : 'border-gray-200 bg-gray-50'
+                        ? 'border-red-200 bg-red-50/80' 
+                        : 'border-gray-200 bg-gray-50/80'
                     }`}
                   >
                     <div className="flex justify-between items-start">
@@ -407,17 +407,17 @@ export default function Dashboard() {
                         <h4 className="font-semibold text-gray-900">Audit #{log.id.substring(0, 8)}...</h4>
                         <p className="text-sm text-gray-600">Session: {log.sessionId.substring(0, 8)}...</p>
                       </div>
-                      <Badge variant={log.policyViolation ? 'error' : 'success'} size="sm">
+                      <Badge variant={log.policyViolation ? 'error' : 'success'} size="sm" className="interactive-element">
                         {log.policyViolation ? 'Violation' : 'Compliant'}
                       </Badge>
                     </div>
                     
                     <div className="mt-2 text-sm">
                       <p className="font-semibold">Prompt:</p>
-                      <p className="text-gray-700 bg-gray-100 p-2 rounded">{log.prompt}</p>
+                      <p className="text-gray-700 bg-gray-100/80 p-2 rounded">{log.prompt}</p>
                       
                       <p className="font-semibold mt-2">Response:</p>
-                      <p className="text-gray-700 bg-gray-100 p-2 rounded">{log.response}</p>
+                      <p className="text-gray-700 bg-gray-100/80 p-2 rounded">{log.response}</p>
                     </div>
                     
                     <div className="mt-2 flex items-center text-sm text-gray-600">
@@ -436,7 +436,7 @@ export default function Dashboard() {
                 ))}
                 
                 {auditLogs.length === 0 && (
-                  <div className="text-center py-8 text-gray-500">
+                  <div className="text-center py-8 text-gray-500 interactive-element">
                     No audit records
                   </div>
                 )}

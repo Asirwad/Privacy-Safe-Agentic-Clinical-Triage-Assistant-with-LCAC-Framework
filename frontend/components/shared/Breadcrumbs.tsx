@@ -16,12 +16,12 @@ interface BreadcrumbsProps {
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
   return (
     <nav 
-      className={cn('flex items-center py-2 px-4 bg-gray-100 dark:bg-gray-800 rounded text-sm', className)} 
+      className={cn('flex items-center py-2 px-4 glass-card rounded text-sm', className)} 
       aria-label="Breadcrumb"
     >
       <Link
         href="/"
-        className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors flex items-center font-medium"
+        className="text-blue-600 hover:text-blue-800 transition-colors flex items-center font-medium interactive-element"
       >
         <Home className="h-4 w-4 mr-1" />
         <span>Home</span>
@@ -32,20 +32,20 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
         
         return (
           <React.Fragment key={index}>
-            <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500 mx-2" />
+            <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
             {isLast ? (
-              <span className="text-gray-900 dark:text-gray-100 font-semibold truncate max-w-xs">
+              <span className="text-gray-900 font-semibold truncate max-w-xs">
                 {item.label}
               </span>
             ) : item.href ? (
               <Link
                 href={item.href}
-                className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium truncate max-w-xs"
+                className="text-blue-600 hover:text-blue-800 transition-colors font-medium truncate max-w-xs interactive-element"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="text-gray-600 dark:text-gray-400 truncate max-w-xs">
+              <span className="text-gray-600 truncate max-w-xs">
                 {item.label}
               </span>
             )}
