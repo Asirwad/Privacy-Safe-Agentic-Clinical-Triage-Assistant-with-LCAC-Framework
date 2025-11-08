@@ -1,8 +1,8 @@
 """Initialize database with sample data."""
 
-from backend.database import init_db, get_session
-from backend.models import Memory, Session as SessionModel, TrustScore
-from backend.lcac import LCACPolicy
+from app.database import init_db, get_session
+from app.models import Memory, Session as SessionModel, TrustScore
+from app.lcac import LCACPolicy
 import hashlib
 from datetime import datetime
 
