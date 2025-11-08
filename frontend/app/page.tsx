@@ -1,5 +1,8 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import { Card, CardHeader } from "@/components/shared/Card"
+import { Button } from "@/components/shared/Button"
+import { Badge } from "@/components/shared/Badge"
 
 export const metadata: Metadata = {
   title: "LCAC Clinical Triage Dashboard",
@@ -11,16 +14,24 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">LCAC Clinical Triage System</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Privacy-Safe Agentic Clinical Triage Assistant with Least-Context Access Control
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">LCAC Clinical Triage System</h1>
+              <p className="mt-1 text-sm text-gray-500">
+                Privacy-Safe Agentic Clinical Triage Assistant with Least-Context Access Control
+              </p>
+            </div>
+            <Badge variant="info">Enterprise</Badge>
+          </div>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        <div className="bg-white shadow rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Welcome to the LCAC Dashboard</h2>
+        <Card className="mb-8">
+          <CardHeader 
+            title="Welcome to the LCAC Dashboard" 
+            subtitle="Enterprise-grade dashboard for visualizing the LCAC framework"
+          />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="border border-blue-200 rounded-lg p-6 bg-blue-50">
@@ -45,17 +56,19 @@ export default function Home() {
           </div>
           
           <div className="text-center">
-            <Link 
-              href="/dashboard"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Access Dashboard
+            <Link href="/dashboard">
+              <Button size="lg">
+                Access Dashboard
+              </Button>
             </Link>
           </div>
-        </div>
+        </Card>
         
-        <div className="mt-8 bg-white shadow rounded-lg p-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">LCAC Framework Principles</h3>
+        <Card>
+          <CardHeader 
+            title="LCAC Framework Principles" 
+            subtitle="Core concepts behind the cognitive security framework"
+          />
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
@@ -94,7 +107,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </Card>
       </main>
     </div>
   )

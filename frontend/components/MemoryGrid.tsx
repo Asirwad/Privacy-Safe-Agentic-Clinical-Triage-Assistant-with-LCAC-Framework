@@ -1,4 +1,6 @@
 import React from 'react'
+import { Card, CardHeader } from '@/components/shared/Card'
+import { Badge } from '@/components/shared/Badge'
 
 interface Memory {
   id: string
@@ -36,30 +38,33 @@ export function MemoryGrid({ memories, activeZone, zones }: MemoryGridProps) {
   )
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Memory Management</h3>
+    <Card>
+      <CardHeader 
+        title="Memory Management" 
+        subtitle="Accessible and blocked memories by zone"
+      />
       
       <div className="mb-6">
-        <h4 className="font-medium text-green-700">Accessible Memories in {activeZoneData?.name} Zone</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+        <h4 className="font-medium text-green-700 mb-3">Accessible Memories in {activeZoneData?.name} Zone</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {accessibleMemories.map((memory) => (
             <div key={memory.id} className="border border-green-200 rounded-lg p-4 bg-green-50">
               <div className="flex justify-between items-start">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <Badge variant="success" size="sm">
                   {memory.zone}
-                </span>
+                </Badge>
                 {memory.redacted && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                  <Badge variant="error" size="sm">
                     Redacted
-                  </span>
+                  </Badge>
                 )}
               </div>
               <p className="mt-2 text-sm text-gray-700">{memory.content}</p>
               <div className="mt-2 flex flex-wrap gap-1">
                 {memory.tags.map((tag) => (
-                  <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <Badge key={tag} variant="info" size="sm">
                     {tag}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -73,26 +78,26 @@ export function MemoryGrid({ memories, activeZone, zones }: MemoryGridProps) {
       </div>
       
       <div>
-        <h4 className="font-medium text-red-700">Inaccessible/Blocked Memories</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+        <h4 className="font-medium text-red-700 mb-3">Inaccessible/Blocked Memories</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {inaccessibleMemories.map((memory) => (
             <div key={memory.id} className="border border-red-200 rounded-lg p-4 bg-red-50 opacity-70">
               <div className="flex justify-between items-start">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                <Badge variant="error" size="sm">
                   {memory.zone}
-                </span>
+                </Badge>
                 {memory.redacted && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                  <Badge variant="error" size="sm">
                     Redacted
-                  </span>
+                  </Badge>
                 )}
               </div>
               <p className="mt-2 text-sm text-gray-700">{memory.content}</p>
               <div className="mt-2 flex flex-wrap gap-1">
                 {memory.tags.map((tag) => (
-                  <span key={tag} className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                  <Badge key={tag} variant="default" size="sm">
                     {tag}
-                  </span>
+                  </Badge>
                 ))}
               </div>
               <div className="mt-2 text-xs text-red-600">
@@ -107,6 +112,6 @@ export function MemoryGrid({ memories, activeZone, zones }: MemoryGridProps) {
           )}
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

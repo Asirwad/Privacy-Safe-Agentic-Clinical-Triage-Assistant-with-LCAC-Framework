@@ -1,4 +1,6 @@
 import React from 'react'
+import { Card, CardHeader } from '@/components/shared/Card'
+import { Badge } from '@/components/shared/Badge'
 
 interface AuditLog {
   id: string
@@ -17,8 +19,11 @@ interface AuditTrailProps {
 
 export function AuditTrail({ logs }: AuditTrailProps) {
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Audit Trail</h3>
+    <Card>
+      <CardHeader 
+        title="Audit Trail" 
+        subtitle="Complete provenance tracking for all inference events"
+      />
       
       <div className="space-y-4">
         {logs.map((log) => (
@@ -35,13 +40,9 @@ export function AuditTrail({ logs }: AuditTrailProps) {
                 <h4 className="font-medium text-gray-900">Audit #{log.id.substring(0, 8)}...</h4>
                 <p className="text-sm text-gray-600">Session: {log.sessionId.substring(0, 8)}...</p>
               </div>
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                log.policyViolation 
-                  ? 'bg-red-100 text-red-800' 
-                  : 'bg-green-100 text-green-800'
-              }`}>
+              <Badge variant={log.policyViolation ? 'error' : 'success'} size="sm">
                 {log.policyViolation ? 'Violation' : 'Compliant'}
-              </span>
+              </Badge>
             </div>
             
             <div className="mt-2 text-sm">
@@ -73,6 +74,6 @@ export function AuditTrail({ logs }: AuditTrailProps) {
           </div>
         )}
       </div>
-    </div>
+    </Card>
   )
 }

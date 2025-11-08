@@ -1,4 +1,6 @@
 import React from 'react'
+import { Card, CardHeader } from '@/components/shared/Card'
+import { Badge } from '@/components/shared/Badge'
 
 interface TrustScoreData {
   userId: string
@@ -13,17 +15,20 @@ interface TrustScoreProps {
 
 export function TrustScore({ scores }: TrustScoreProps) {
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Trust Scores</h3>
+    <Card>
+      <CardHeader 
+        title="Trust Scores" 
+        subtitle="Dynamic trust scoring based on policy compliance"
+      />
       
       <div className="space-y-4">
         {scores.map((score) => (
           <div key={score.userId} className="border border-gray-200 rounded-lg p-4">
             <div className="flex justify-between items-start">
               <h4 className="font-medium text-gray-900">User: {score.userId}</h4>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <Badge variant="info" size="sm">
                 Score: {score.score.toFixed(2)}
-              </span>
+              </Badge>
             </div>
             
             <div className="mt-3">
@@ -61,6 +66,6 @@ export function TrustScore({ scores }: TrustScoreProps) {
           </div>
         )}
       </div>
-    </div>
+    </Card>
   )
 }

@@ -1,7 +1,11 @@
 "use client"
 
 import { useState } from 'react'
-import { askApi, sessionApi, memoryApi } from "services/api"
+import { Card, CardHeader } from '@/components/shared/Card'
+import { Button } from '@/components/shared/Button'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
+import { Badge } from '@/components/shared/Badge'
+import { askApi, sessionApi } from "@/services/api"
 
 interface Message {
   id: string
@@ -99,8 +103,18 @@ export function TriageAssistant() {
   }
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Clinical Triage Assistant</h3>
+    <Card>
+      <CardHeader 
+        title="Clinical Triage Assistant" 
+        subtitle="Interactive demo of the privacy-safe AI assistant"
+        action={
+          sessionId && (
+            <Badge variant="success" size="sm">
+              Session: {sessionId.substring(0, 8)}...
+            </Badge>
+          )
+        }
+      />
       
       <div className="border border-gray-200 rounded-lg h-96 flex flex-col">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -128,9 +142,7 @@ export function TriageAssistant() {
             <div className="flex justify-start">
               <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
                 <div className="flex space-x-2">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                  <LoadingSpinner size="sm" />
                 </div>
               </div>
             </div>
@@ -147,13 +159,12 @@ export function TriageAssistant() {
               className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               disabled={loading}
             />
-            <button
+            <Button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               disabled={loading || !input.trim()}
             >
-              Send
-            </button>
+              {loading ? <LoadingSpinner size="sm" /> : 'Send'}
+            </Button>
           </div>
         </form>
       </div>
@@ -168,6 +179,6 @@ export function TriageAssistant() {
         <p><strong>LCAC Status:</strong> Active</p>
         <p className="mt-1">Zone: Triage | Session: {sessionId ? sessionId.substring(0, 8) + '...' : 'Not established'}</p>
       </div>
-    </div>
+    </Card>
   )
 }

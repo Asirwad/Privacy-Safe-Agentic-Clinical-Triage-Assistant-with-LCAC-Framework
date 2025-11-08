@@ -1,14 +1,18 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { ZoneVisualization } from "components/ZoneVisualization"
-import { MemoryGrid } from "components/MemoryGrid"
-import { SessionPanel } from "components/SessionPanel"
-import { AuditTrail } from "components/AuditTrail"
-import { TrustScore } from "components/TrustScore"
-import { LcacExplanation } from "components/LcacExplanation"
-import { TriageAssistant } from "components/TriageAssistant"
-import { memoryApi } from "services/api"
+import { ZoneVisualization } from "@/components/ZoneVisualization"
+import { MemoryGrid } from "@/components/MemoryGrid"
+import { SessionPanel } from "@/components/SessionPanel"
+import { AuditTrail } from "@/components/AuditTrail"
+import { TrustScore } from "@/components/TrustScore"
+import { LcacExplanation } from "@/components/LcacExplanation"
+import { TriageAssistant } from "@/components/TriageAssistant"
+import { memoryApi } from "@/services/api"
+import { LoadingPage } from '@/components/shared/LoadingSpinner'
+import { Card, CardHeader } from '@/components/shared/Card'
+import { Button } from '@/components/shared/Button'
+import { Badge } from '@/components/shared/Badge'
 
 interface Zone {
   id: string
@@ -131,29 +135,22 @@ export default function Dashboard() {
   }, [])
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard data...</p>
-        </div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center bg-red-50 p-6 rounded-lg max-w-md">
-          <h3 className="text-lg font-medium text-red-800">Error</h3>
-          <p className="mt-2 text-red-600">{error}</p>
-          <button
-            onClick={fetchData}
-            className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-          >
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full">
+          <CardHeader 
+            title="Error" 
+            subtitle="Failed to load dashboard data"
+          />
+          <div className="text-red-600 mb-4">{error}</div>
+          <Button onClick={fetchData}>
             Retry
-          </button>
-        </div>
+          </Button>
+        </Card>
       </div>
     )
   }
@@ -162,20 +159,26 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">LCAC Clinical Triage Dashboard</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Visualizing the Least-Context Access Control framework in action
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">LCAC Clinical Triage Dashboard</h1>
+              <p className="mt-1 text-sm text-gray-500">
+                Visualizing the Least-Context Access Control framework in action
+              </p>
+            </div>
+            <Badge variant="success">Live</Badge>
+          </div>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         {/* LCAC Explanation */}
-        <LcacExplanation />
+        <div className="mb-8">
+          <LcacExplanation />
+        </div>
 
         {/* Zone Visualization */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Zone-Based Access Control</h2>
           <ZoneVisualization 
             zones={zones} 
             activeZone={activeZone} 

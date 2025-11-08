@@ -1,10 +1,10 @@
 import React from 'react'
+import { Card } from '@/components/shared/Card'
+import { Badge } from '@/components/shared/Badge'
 
 export function LcacExplanation() {
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-8">
-      <h2 className="text-xl font-bold text-gray-900 mb-4">LCAC Framework Visualization</h2>
-      
+    <Card>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
           <h3 className="font-bold text-blue-800 mb-2">Zone-Based Access Control</h3>
@@ -40,6 +40,6 @@ export function LcacExplanation() {
           <li>Maintains complete audit logs of all AI interactions for compliance</li>
         </ul>
       </div>
-    </div>
+    </Card>
   )
 }

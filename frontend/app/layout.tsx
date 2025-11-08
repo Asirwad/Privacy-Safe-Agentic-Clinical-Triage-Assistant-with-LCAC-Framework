@@ -1,13 +1,14 @@
 import "styles/tailwind.css"
 import { ReactNode } from "react"
+import { Layout } from "@/components/Layout"
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="motion-safe:scroll-smooth">
       <body>
-        <div className="min-h-screen bg-gray-50">
+        <Layout>
           {children}
-        </div>
+        </Layout>
       </body>
     </html>
   )

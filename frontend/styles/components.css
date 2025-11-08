@@ -1,0 +1,43 @@
+/* Card Styles */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700;
+}
+
+.card-hover {
+  @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-all duration-200 hover:shadow-md;
+}
+
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900;
+}
+
+/* Animation durations */
+.duration-fast {
+  @apply duration-150;
+}
+
+.duration-medium {
+  @apply duration-300;
+}
+
+.duration-slow {
+  @apply duration-500;
+}
+
+/* Text styles */
+.text-h4 {
+  @apply text-lg font-bold;
+}
+
+.text-body {
+  @apply text-sm;
+}
+
+.text-body-lg {
+  @apply text-base;
+}
+
+/* Background colors */
+.bg-slate {
+  @apply bg-gray-200 dark:bg-gray-700;
+}
