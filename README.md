@@ -61,5 +61,3 @@ For detailed technical documentation, setup instructions, and API references, pl
 - [Backend Documentation](backend/README.md) - FastAPI Framework
 
 ---
-
-*© 2023 LCAC Clinical Triage Assistant. LCAC Framework is Copyright © 2023 Atom Labs.*
