@@ -51,7 +51,7 @@ Each reasoning event is treated as a bounded transaction, with LCAC verifying co
 
 ## Acknowledgements
 
-This implementation utilizes the Least-Context Access Control (LCAC) framework developed by Quinton Stackfield at Atom Labs.
+This implementation utilizes the Least-Context Access Control (LCAC) framework developed by Quinton Stackfield at Atom Labs. [LCAC Framework](https://github.com/qstackfield/atomlabs-lcac-framework)
 
 ## Documentation
 
