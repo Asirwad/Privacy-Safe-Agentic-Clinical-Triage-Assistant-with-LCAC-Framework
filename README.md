@@ -1,141 +1,65 @@
-# Privacy-Safe Agentic Clinical Triage Assistant
+# LCAC Clinical Triage Assistant
 
-A privacy-safe clinical triage assistant implementing the **LCAC (Least-Context Access Control)** framework to extend Zero Trust principles into the cognitive layer of AI systems.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![Next.js](https://img.shields.io/badge/next.js-13%2B-black.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.68%2B-blue.svg)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-0.1%2B-green.svg)](https://github.com/hwchase17/langchain)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--3.5%2F4-green.svg)](https://openai.com/)
+[![Google Gemini](https://img.shields.io/badge/Google-Gemini-blue.svg)](https://ai.google/)
+[![Pydantic](https://img.shields.io/badge/Pydantic-v2.0%2B-blue.svg)](https://pydantic.dev/)
 
-## Project Structure
+**Privacy-Preserving AI for Clinical Triage - Powered by Least-Context Access Control (LCAC)**
 
-```
-.
-├── backend/                 # FastAPI backend with LCAC framework
-│   ├── app/                 # Main application code
-│   │   ├── main.py          # FastAPI application entrypoint
-│   │   ├── config.py        # Configuration settings
-│   │   ├── database.py      # Database connection setup
-│   │   ├── models.py        # SQLModel data models
-│   │   ├── lcac.py          # LCAC engine and policy definitions
-│   │   ├── trust.py         # Trust scoring logic
-│   │   └── orchestrator.py  # LangChain agent orchestrator with hooks
-│   ├── scripts/             # Utility scripts
-│   │   ├── init_db.py       # Initialize SQLite database schema
-│   │   └── demo_scenarios.py# Run demonstration scenarios
-│   ├── requirements.txt     # Python dependencies
-│   ├── Dockerfile           # Container build instructions
-│   └── docker-compose.yml   # Multi-container orchestration
-└── frontend/                # Next.js dashboard for visualization
-    ├── app/                 # Next.js app router pages
-    ├── components/          # React components
-    ├── services/            # API service layer
-    ├── styles/              # Tailwind CSS styles
-    └── ...                  # Other Next.js files
-```
+---
 
-## Quick Start
+## Overview
 
-### Backend Setup
+The LCAC Clinical Triage Assistant implements the Least-Context Access Control (LCAC) framework to extend Zero Trust principles into the cognitive layer of AI systems. It ensures AI agents only access and reason about information authorized for their specific zone (e.g., triage, radiology, billing).
 
-1. **Navigate to the backend directory**:
-   ```bash
-   cd backend
-   ```
+This system addresses the emerging challenge of contextual contamination in AI systems, where agents may carry or infer knowledge across domains in unintended ways. LCAC enforces reasoning isolation, ensuring every inference occurs within a bounded context of trust.
 
-2. **Create a virtual environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+## Key Features
 
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Cognitive Security
+- Zone-based memory access control
+- Pre/post-inference LCAC policy enforcement
+- Reasoning isolation to prevent inference drift
+- Cognitive integrity with traceable, verifiable inferences
 
-4. **Initialize the database**:
-   ```bash
-   python scripts/init_db.py
-   ```
+### Privacy & Compliance
+- Full audit logging with provenance tracking
+- Dynamic trust scoring based on policy compliance
+- Session revocation on policy violations
+- GDPR-compliant memory redaction
 
-5. **Start the backend server**:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+### Clinical Decision Support
+- Multi-zone AI agents for specialized clinical domains
+- Real-time monitoring of AI behavior and trust levels
+- Comprehensive audit trail for regulatory compliance
+- Support for multiple LLM providers (OpenAI, Google Gemini)
 
-### Frontend Setup
+## Architecture
 
-1. **Navigate to the frontend directory**:
-   ```bash
-   cd frontend
-   ```
+The system implements a three-layer control plane architecture:
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+1. **Data Plane**: Manages storage, retrieval, and access to factual data
+2. **Model Plane**: Manages algorithmic inference, policy, and functional execution
+3. **Cognitive Plane (LCAC)**: Governs reasoning, contextual recall, and information blending between agents
 
-3. **Copy environment example**:
-   ```bash
-   cp .env.local.example .env.local
-   ```
+Each reasoning event is treated as a bounded transaction, with LCAC verifying cognitive integrity before and after inference to ensure no cross-context contamination occurs.
 
-4. **Start the frontend development server**:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
+## Acknowledgements
 
-5. **Open the dashboard**:
-   Visit [http://localhost:3000](http://localhost:3000) in your browser
+This implementation utilizes the Least-Context Access Control (LCAC) framework developed by Quinton Stackfield at Atom Labs.
 
-## Features
+## Documentation
 
-### LCAC Framework
-- **Zone-based Access Control**: Memories are tagged and filtered by zone (triage, radiology, billing, etc.)
-- **Policy Enforcement**: Pre-inference and post-inference hooks enforce policy compliance
-- **Audit Logging**: Complete provenance tracking for all inference events
-- **Trust Scoring**: Dynamic trust scores based on policy violations and successful inferences
-- **Session Revocation**: Automatic session termination on policy violations
-- **Memory Redaction**: GDPR-compliant memory redaction with audit trail
+For detailed technical documentation, setup instructions, and API references, please refer to our specialized documentation:
 
-### Dashboard Visualization
-- **Zone-Based Access Control**: Interactive visualization of LCAC zones and their allowed tags
-- **Memory Management**: Real-time display of accessible and blocked memories
-- **Session Monitoring**: Track active and revoked sessions
-- **Audit Trail**: Comprehensive logging of all AI interactions
-- **Trust Scoring**: Dynamic trust scores based on policy compliance
-- **Clinical Triage Assistant**: Interactive demo of the privacy-safe AI assistant
+- [Frontend Documentation](frontend/README.md) - Next.js 13+ Dashboard
+- [Backend Documentation](backend/README.md) - FastAPI Framework
 
-## API Documentation
+---
 
-Once the backend server is running, visit:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-
-## Demo Scenarios
-
-Run the demo scripts to see the system in action:
-
-```bash
-cd backend
-python scripts/demo_scenarios.py
-```
-
-## Security Considerations
-
-This is an MVP demonstration. For production use, consider:
-- **Encryption**: Encrypt sensitive data at rest and in transit
-- **Authentication**: Implement proper user authentication (OAuth2, JWT)
-- **Authorization**: Fine-grained role-based access control
-- **PII Handling**: Implement proper PII detection and masking
-- **Audit Logging**: Secure, tamper-proof audit logs
-- **Rate Limiting**: Implement rate limiting to prevent abuse
-- **Input Validation**: Enhanced input validation and sanitization
-
-## License
-
-MIT License
+*© 2023 LCAC Clinical Triage Assistant. LCAC Framework is Copyright © 2023 Atom Labs.*
