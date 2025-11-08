@@ -1,0 +1,250 @@
+@import 'tailwindcss';
+
+:root {
+  /* Jira color palette */
+  --jira-blue: #0052cc;
+  --jira-blue-hover: #0065ff;
+  --jira-blue-light: #deebff;
+  --jira-gray-dark: #172b4d;
+  --jira-gray: #344563;
+  --jira-gray-medium: #5e6c84;
+  --jira-gray-light: #dfe1e6;
+  --jira-gray-lighter: #f4f5f7;
+  --jira-green: #00875a;
+  --jira-green-light: #e3fcef;
+  --jira-red: #de350b;
+  --jira-red-light: #ffebee;
+  --jira-yellow: #ff991f;
+  --jira-yellow-light: #fff4e5;
+  --jira-purple: #6554c0;
+  --jira-purple-light: #eae6ff;
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.75rem; /* 28px */
+  --font-size-4xl: 2rem; /* 32px */
+  
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Spacing */
+  --spacing-3xs: 0.125rem; /* 2px */
+  --spacing-2xs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem; /* 8px */
+  --spacing-sm: 0.75rem; /* 12px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 2.5rem; /* 40px */
+  --spacing-3xl: 3rem; /* 48px */
+  
+  /* Border radius */
+  --border-radius-sm: 0.125rem; /* 2px */
+  --border-radius-md: 0.25rem; /* 4px */
+  --border-radius-lg: 0.5rem; /* 8px */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 1px rgba(9, 30, 66, 0.08), 0 0 1px rgba(9, 30, 66, 0.25);
+  --shadow-md: 0 1px 2px rgba(9, 30, 66, 0.08), 0 0 2px rgba(9, 30, 66, 0.25);
+  --shadow-lg: 0 2px 4px rgba(9, 30, 66, 0.08), 0 0 4px rgba(9, 30, 66, 0.25);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--jira-gray-dark);
+  background-color: white;
+  line-height: 1.42857142857143;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography classes */
+.text-jira-xs {
+  font-size: var(--font-size-xs);
+}
+
+.text-jira-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-jira-md {
+  font-size: var(--font-size-md);
+}
+
+.text-jira-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-jira-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-jira-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+.text-jira-3xl {
+  font-size: var(--font-size-3xl);
+}
+
+.text-jira-4xl {
+  font-size: var(--font-size-4xl);
+}
+
+.font-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Color utility classes */
+.text-jira-blue {
+  color: var(--jira-blue);
+}
+
+.text-jira-gray-dark {
+  color: var(--jira-gray-dark);
+}
+
+.text-jira-gray {
+  color: var(--jira-gray);
+}
+
+.text-jira-gray-medium {
+  color: var(--jira-gray-medium);
+}
+
+.bg-jira-blue {
+  background-color: var(--jira-blue);
+}
+
+.bg-jira-blue-light {
+  background-color: var(--jira-blue-light);
+}
+
+.bg-jira-gray-lighter {
+  background-color: var(--jira-gray-lighter);
+}
+
+.bg-jira-green-light {
+  background-color: var(--jira-green-light);
+}
+
+.bg-jira-red-light {
+  background-color: var(--jira-red-light);
+}
+
+.bg-jira-yellow-light {
+  background-color: var(--jira-yellow-light);
+}
+
+.bg-jira-purple-light {
+  background-color: var(--jira-purple-light);
+}
+
+.border-jira-gray-light {
+  border-color: var(--jira-gray-light);
+}
+
+/* Focus styles */
+.focus-ring {
+  outline: 2px solid var(--jira-blue);
+  outline-offset: -2px;
+}
+
+/* Link styles */
+.link {
+  color: var(--jira-blue);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--jira-blue-hover);
+  text-decoration: underline;
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--jira-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--jira-blue-hover);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--jira-gray-dark);
+  border: 1px solid var(--jira-gray-light);
+}
+
+.btn-secondary:hover {
+  background-color: var(--jira-gray-lighter);
+}
+
+.btn-subtle {
+  background-color: transparent;
+  color: var(--jira-gray);
+}
+
+.btn-subtle:hover {
+  background-color: var(--jira-gray-lighter);
+}
+
+/* Card styles */
+.card {
+  background-color: white;
+  border: 1px solid var(--jira-gray-light);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-hover {
+  background-color: white;
+  border: 1px solid var(--jira-gray-light);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-md);
+}

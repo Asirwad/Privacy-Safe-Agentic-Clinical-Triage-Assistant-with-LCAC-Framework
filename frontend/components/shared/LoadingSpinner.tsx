@@ -1,7 +1,6 @@
-"use client"
-
 import { cn } from '@/lib/utils/helpers';
 import React from 'react';
+
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -19,7 +18,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   return (
     <svg
-      className={cn('animate-spin text-blue-600 dark:text-blue-400', sizes[size], className)}
+      className={cn('animate-spin text-blue-600', sizes[size], className)}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -46,7 +45,7 @@ export const LoadingPage: React.FC = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="text-center">
         <LoadingSpinner size="lg" className="mx-auto mb-4" />
-        <p className="text-gray-500 dark:text-gray-400">Loading...</p>
+        <p className="text-gray-600">Loading...</p>
       </div>
     </div>
   );

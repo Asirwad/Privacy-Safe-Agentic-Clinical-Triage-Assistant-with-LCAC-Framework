@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils/helpers';
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface CardProps {
   children: React.ReactNode;
@@ -19,17 +18,13 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const paddingStyles = {
     none: '',
-    sm: 'p-4',
-    md: 'p-6',
-    lg: 'p-8',
+    sm: 'p-3',
+    md: 'p-4',
+    lg: 'p-6',
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      whileHover={hover ? { y: -2 } : {}}
+    <div
       className={cn(
         hover ? 'card-hover' : 'card',
         paddingStyles[padding],
@@ -37,7 +32,7 @@ export const Card: React.FC<CardProps> = ({
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -55,41 +50,22 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   className,
 }) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, delay: 0.1 }}
-      className={cn('flex items-start justify-between mb-4', className)}
-    >
+    <div className={cn('flex items-start justify-between mb-4', className)}>
       <div>
-        <motion.h3 
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.2, delay: 0.15 }}
-          className="text-lg font-bold text-gray-900 dark:text-gray-100"
-        >
+        <h3 className="text-lg font-semibold text-gray-900">
           {title}
-        </motion.h3>
+        </h3>
         {subtitle && (
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, delay: 0.2 }}
-            className="text-sm text-gray-500 dark:text-gray-400 mt-1"
-          >
+          <p className="text-sm text-gray-600 mt-1">
             {subtitle}
-          </motion.p>
+          </p>
         )}
       </div>
       {action && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.2, delay: 0.25 }}
-        >
+        <div>
           {action}
-        </motion.div>
+        </div>
       )}
-    </motion.div>
+    </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ChevronRightIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/lib/utils/helpers';
 
 export interface BreadcrumbItem {
@@ -15,12 +15,16 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
   return (
-    <nav className={cn('flex items-center space-x-2 text-body-sm', className)} aria-label="Breadcrumb">
+    <nav 
+      className={cn('flex items-center py-2 px-4 bg-gray-100 dark:bg-gray-800 rounded text-sm', className)} 
+      aria-label="Breadcrumb"
+    >
       <Link
         href="/"
-        className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+        className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors flex items-center font-medium"
       >
-        <HomeIcon className="h-4 w-4" />
+        <Home className="h-4 w-4 mr-1" />
+        <span>Home</span>
       </Link>
       
       {items.map((item, index) => {
@@ -28,20 +32,22 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
         
         return (
           <React.Fragment key={index}>
-            <ChevronRightIcon className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+            <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500 mx-2" />
             {isLast ? (
-              <span className="text-gray-900 dark:text-gray-100 font-medium">
+              <span className="text-gray-900 dark:text-gray-100 font-semibold truncate max-w-xs">
                 {item.label}
               </span>
             ) : item.href ? (
               <Link
                 href={item.href}
-                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium truncate max-w-xs"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="text-gray-500 dark:text-gray-400">{item.label}</span>
+              <span className="text-gray-600 dark:text-gray-400 truncate max-w-xs">
+                {item.label}
+              </span>
             )}
           </React.Fragment>
         );
@@ -49,4 +55,3 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
     </nav>
   );
 };
-
