@@ -1,5 +1,10 @@
 """Initialize database with sample data."""
 
+import sys
+import os
+# Add the parent directory to the path so we can import from app
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
 from app.database import init_db, get_session
 from app.models import Memory, Session as SessionModel, TrustScore
 from app.lcac import LCACPolicy
@@ -64,4 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
